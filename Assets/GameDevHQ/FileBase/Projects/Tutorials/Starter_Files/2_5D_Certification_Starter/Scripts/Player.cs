@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     private CharacterController _controller;
     private Vector3 _velocity;
     private float _yVelocity;
-    private Rigidbody _rigidbody;
     private Animator _anim;
     private bool _isJumping;
     private bool _isHanging;
@@ -20,6 +19,7 @@ public class Player : MonoBehaviour
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Jump = Animator.StringToHash("Jumping");
     private static readonly int ClimbUp = Animator.StringToHash("ClimbUp");
+    
 
 
     // Start is called before the first frame update
@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
         }
 
         _anim = GetComponentInChildren<Animator>();
-
     }
 
     // Update is called once per frame
@@ -43,11 +42,9 @@ public class Player : MonoBehaviour
             HandleMovePlayer();
         }
 
-        if (_isHanging && Input.GetKeyDown(KeyCode.E))
-        {
-            _anim.SetTrigger(ClimbUp);
-            _isHanging = false;
-        }
+        if (!_isHanging || !Input.GetKeyDown(KeyCode.E)) return;
+        _anim.SetTrigger(ClimbUp);
+        _isHanging = false;
     }
 
     private void HandleMovePlayer()
@@ -83,16 +80,16 @@ public class Player : MonoBehaviour
         _controller.Move(_direction * Time.deltaTime);
     }
 
-    public void LedgeGrab(Vector3 snapPoint, Ledge currentLedge)
+    public void LedgeGrab(Ledge currentLedge)
     {
+        _activeLedge = currentLedge;
         _controller.enabled = false;
-        transform.position = snapPoint;
+        transform.position = _activeLedge.GetHandSnapPoint();
         _isJumping = false;
         _anim.SetBool(Jump, _isJumping);
         _anim.SetFloat(Speed, 0.0f);
         _isHanging = true;
         _anim.SetBool(GrabLedge, _isHanging);
-        _activeLedge = currentLedge;
     }
 
     public void ClimbEdgeComplete()

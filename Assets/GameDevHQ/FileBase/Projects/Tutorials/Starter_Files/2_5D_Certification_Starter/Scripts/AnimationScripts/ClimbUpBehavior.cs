@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class ClimbUpBehavior : StateMachineBehaviour
@@ -21,7 +20,6 @@ public class ClimbUpBehavior : StateMachineBehaviour
     {
         var player = animator.gameObject.GetComponentInParent<Player>();
         player.ClimbEdgeComplete();
-        Debug.Log("Working");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

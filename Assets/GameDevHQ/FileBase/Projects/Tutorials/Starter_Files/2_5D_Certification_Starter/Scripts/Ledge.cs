@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class Ledge : MonoBehaviour
 {
-    [SerializeField] private Vector3 _snapPoint;
+    [SerializeField] private GameObject _snapPoint;
+    [SerializeField] private GameObject _standPos;
 
-    [SerializeField]
-    private Vector3 _standPos;
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag($"Ledge_Grab_Checker")) return;
@@ -17,10 +16,10 @@ public class Ledge : MonoBehaviour
 
         if (player != null)
         {
-            player.LedgeGrab(_snapPoint, this);
-            
+            player.LedgeGrab(this);
         }
     }
 
-    public Vector3 GetStandPos() => _standPos;
+    public Vector3 GetStandPos() => _standPos.transform.position;
+    public Vector3 GetHandSnapPoint() => _snapPoint.transform.position;
 }

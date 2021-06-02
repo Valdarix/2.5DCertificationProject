@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private List<Transform> _wayPoints;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _holdTime;
     private int _currentWaypoint;
     private bool _holding;
  
@@ -35,7 +36,7 @@ public class MovingPlatform : MonoBehaviour
     private IEnumerator HoldAtLocation()
     {
         _holding = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(_holdTime);
         _holding = false;
     }
 

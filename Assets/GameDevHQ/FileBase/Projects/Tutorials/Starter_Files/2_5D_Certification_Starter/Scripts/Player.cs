@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _gravity;
+    [SerializeField] private int _toolCount;
     private Vector3 _direction;
     private CharacterController _controller;
     private Vector3 _velocity;
@@ -20,8 +21,7 @@ public class Player : MonoBehaviour
     private static readonly int Jump = Animator.StringToHash("Jumping");
     private static readonly int ClimbUp = Animator.StringToHash("ClimbUp");
     
-
-
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
         }
 
         _anim = GetComponentInChildren<Animator>();
+        _toolCount = 0;
     }
 
     // Update is called once per frame
@@ -99,4 +100,9 @@ public class Player : MonoBehaviour
         _controller.enabled = true;
     }
 
+    public void CollectTool()
+    {
+        _toolCount++;
+        UI_Manager.Instance.UpdateToolsCountUI(_toolCount);
+    }
 }

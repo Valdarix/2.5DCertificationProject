@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ledge
   - Ledge_Grab_Checker
+  - Ladder_Grab_Checker
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Ledge : MonoBehaviour
 {
@@ -14,10 +12,9 @@ public class Ledge : MonoBehaviour
 
         var player = other.transform.parent.GetComponent<Player>();
 
-        if (player != null)
-        {
-            player.LedgeGrab(this);
-        }
+        if (player == null) return;
+        
+        player.LedgeGrab(this);
     }
 
     public Vector3 GetStandPos() => _standPos.transform.position;

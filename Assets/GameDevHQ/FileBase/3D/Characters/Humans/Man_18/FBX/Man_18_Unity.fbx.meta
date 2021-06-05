@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 7b2eb117a27072f46b11bac53a374847
 ModelImporter:
-  serializedVersion: 21201
+  serializedVersion: 21202
   internalIDToNameTable:
   - first:
       1: 100000
@@ -937,6 +937,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -969,6 +970,9 @@ ModelImporter:
     normalSmoothingSource: 0
   referencedClips:
   - 1902d0b5548489840a23b635fa506c30
+  - 112c7d5f802dcd249b5635d3b3292030
+  - db999fcb0ce8a3548927a0f41ebb566b
+  - 298a1b95f5f688242a5408f5f883498f
   - 3d0b95bdc30ed604cb61928a43d9760b
   - 792fa2d7e770bb049b7f22cd4038794a
   - e3435e5083d475f4c87c6bbc41067b24

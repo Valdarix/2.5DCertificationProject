@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
+
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -11,8 +10,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] private float _holdTime;
     private int _currentWaypoint;
     private bool _holding;
- 
-    // Update is called once per frame
+
     private void FixedUpdate()
     {
         if (_wayPoints == null) return;

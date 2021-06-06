@@ -7,6 +7,7 @@ TagManager:
   - Ledge
   - Ledge_Grab_Checker
   - Ladder_Grab_Checker
+  - RollUnder
   layers:
   - Default
   - TransparentFX

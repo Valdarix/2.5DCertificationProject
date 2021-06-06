@@ -21,13 +21,16 @@ public class Player : MonoBehaviour
     private bool _isClimbingLadder;
     private Ledge _activeLedge;
     private Ladder _activeLadder;
-    
+    private bool _isRolling;
+    private Collider _activeRollUnderCollider;
+
     private static readonly int GrabLedge = Animator.StringToHash("GrabLedge");
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Jump = Animator.StringToHash("Jumping");
     private static readonly int ClimbUp = Animator.StringToHash("ClimbUp");
     private static readonly int ClimbLadderStart = Animator.StringToHash("ClimbLadder");
     private static readonly int EndClimbingLadder = Animator.StringToHash("EndClimbingLadder");
+    private static readonly int Roll = Animator.StringToHash("Roll");
 
 
     // Start is called before the first frame update
@@ -93,9 +96,21 @@ public class Player : MonoBehaviour
                 _isJumping = true;
                _anim.SetBool(Jump, _isJumping);
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !_isJumping)
+            {
+                _anim.SetTrigger(Roll);
+                _isRolling = true;
+            }
         }
         _direction.y -= _gravity * Time.deltaTime;
         _controller.Move(_direction * Time.deltaTime);
+    }
+
+    public void EndRoll()
+    {
+        _activeRollUnderCollider.isTrigger = false;
+        _isRolling = false;
     }
 
     public void LedgeGrab(Ledge currentLedge)
@@ -147,5 +162,13 @@ public class Player : MonoBehaviour
        _anim.SetFloat(Speed, 0.0f);
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!_isRolling || !hit.collider.CompareTag($"RollUnder")) return;
+        
+        _activeRollUnderCollider = hit.collider;
+        _activeRollUnderCollider.isTrigger = true;
+    }
 
+   
 }
